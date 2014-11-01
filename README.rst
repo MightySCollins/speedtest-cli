@@ -33,7 +33,7 @@ or
 
 ::
 
-    git clone https://github.com/sivel/speedtest-cli.git
+    git clone https://github.com/MightySCollins/speedtest-cli.git
     python speedtest-cli/setup.py install
 
 Just download (Like the way it used to be)
@@ -41,14 +41,14 @@ Just download (Like the way it used to be)
 
 ::
 
-    wget -O speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
+    wget -O speedtest-cli https://raw.github.com/MightySCollins/speedtest-cli/master/speedtest_cli.py
     chmod +x speedtest-cli
 
 or
 
 ::
 
-    curl -o speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
+    curl -o speedtest-cli https://raw.github.com/MightySCollins/speedtest-cli/master/speedtest_cli.py
     chmod +x speedtest-cli
 
 Usage
@@ -59,11 +59,11 @@ Usage
     $ speedtest-cli -h
     usage: speedtest-cli [-h] [--bytes] [--share] [--simple] [--list]
                          [--server SERVER] [--mini MINI] [--source SOURCE]
-                         [--version]
+                         [--version] [--log] [--logcsv] [--logtxt]
     
     Command line interface for testing internet bandwidth using speedtest.net.
     --------------------------------------------------------------------------
-    https://github.com/sivel/speedtest-cli
+    https://github.com/MightySCollins/speedtest-cli
     
     optional arguments:
       -h, --help       show this help message and exit
