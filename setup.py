@@ -64,8 +64,7 @@ setup(
     keywords='speedtest speedtest.net',
     author='Matt Martz and Sam Collins',
     author_email='matt@sivel.net and theatrepro11@gmail.com',
-    url='https://github.com/sivel/speedtest-cli and '
-        https://github.com/MightySCollins/speedtest-cli',
+    url='https://github.com/MightySCollins/speedtest-cli',
     license='Apache License, Version 2.0',
     py_modules=['speedtest_cli'],
     entry_points={
