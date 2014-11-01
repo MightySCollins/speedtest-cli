@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2012-2014 Matt Martz
+# Copyright 2012-2014 Matt Martz and Sam Collins
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -15,7 +15,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-__version__ = '0.3.1'
+__version__ = '0..0'
 
 # Some global variables we use
 source = None
@@ -29,6 +29,8 @@ import signal
 import socket
 import timeit
 import threading
+from time import gmtime, strftime
+import csv
 
 # Used for bound_interface
 socket_socket = socket.socket
@@ -486,6 +488,13 @@ def speedtest():
     parser.add_argument('--source', help='Source IP address to bind to')
     parser.add_argument('--version', action='store_true',
                         help='Show the version number and exit')
+    parser.add_argument('--log', action='store_true',
+                        help='Logs the download and upload speeds to a '
+                             '.csv file and a .txt file')
+    parser.add_argument('--logcsv', action='store_true',
+                        help='Only logs to a .csv file')
+    parser.add_argument('--logtxt', action='store_true',
+                        help='Only logs to a .txt file')
 
     options = parser.parse_args()
     if isinstance(options, tuple):
@@ -621,6 +630,8 @@ def speedtest():
         print_()
     print_('Download: %0.2f M%s/s' %
            ((dlspeed / 1000 / 1000) * args.units[1], args.units[0]))
+    if args.log or args.logtxt or args.logcsv:
+        print_('Download speed saved')
 
     sizesizes = [int(.25 * 1000 * 1000), int(.5 * 1000 * 1000)]
     sizes = []
@@ -634,6 +645,29 @@ def speedtest():
         print_()
     print_('Upload: %0.2f M%s/s' %
            ((ulspeed / 1000 / 1000) * args.units[1], args.units[0]))
+    if args.log or args.logtxt or args.logcsv:
+        print_('Upload speed saved')
+
+    if args.log or args.logcsv:
+        c = csv.writer(open('log.csv', 'a'))
+        if os.stat('log.csv').st_size==0:
+            c.writerow(['Date', 'Time', 'Download', 'Upload'])
+            print_('File log.csv created')
+        c.writerow([strftime("%Y-%m-%d"), strftime("%H:%M:%S"), '%0.2f' %
+                ((dlspeed / 1000 / 1000) * args.units[1]), '%0.2f' %
+                ((ulspeed / 1000 / 1000) * args.units[1])])
+        print_('.csv file saved')
+
+    if args.log or args.logtxt:
+        file = open('log.txt', 'a')
+        file.write(strftime("%Y-%m-%d %H:%M:%S"))
+        file.write('\nDownload: %0.2f M%s/s' %
+           ((dlspeed / 1000 / 1000) * args.units[1], args.units[0]))
+        file.write('\nUpload: %0.2f M%s/s' %
+           ((ulspeed / 1000 / 1000) * args.units[1], args.units[0]))
+        file.write("\n\n")
+        file.close()
+        print_('.txt file saved')
 
     if args.share and args.mini:
         print_('Cannot generate a speedtest.net share results image while '

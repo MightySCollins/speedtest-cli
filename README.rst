@@ -22,19 +22,6 @@ speedtest-cli works with Python 2.4-3.4
 Installation
 ------------
 
-pip / easy\_install
-~~~~~~~~~~~~~~~~~~~
-
-::
-
-    pip install speedtest-cli
-
-or
-
-::
-
-    easy_install speedtest-cli
-
 Github
 ~~~~~~
 
@@ -90,6 +77,14 @@ Usage
       --mini MINI      URL of the Speedtest Mini server
       --source SOURCE  Source IP address to bind to
       --version        Show the version number and exit
+      --log            Logs the download and upload speeds to a .csv file and a .txt file
+      --logcsv         Only logs to a .csv file
+      --logtxt         Only logs to a .txt file
+      
+      
+Bugs
+-------------
+.csv files have line seperating them on some machines
 
 Inconsistency
 -------------
